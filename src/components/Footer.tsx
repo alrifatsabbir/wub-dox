@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Github, Facebook, Mail, Linkedin, Instagram, ExternalLink } from 'lucide-react';
+import { Github, Facebook, Mails, Mail, Linkedin, ExternalLink } from 'lucide-react';
 
 const Footer = () => {
   const { i18n } = useTranslation();
@@ -15,20 +15,20 @@ const Footer = () => {
       ]
     },
     {
-      title: isBengali ? 'কমিউনিটি' : 'Community',
+      title: isBengali ? 'ফলো করুন' : 'Follow Me',
       links: [
-        { name: 'LinkedIn', path: '#', icon: Linkedin, external: true },
-        { name: 'GitHub', path: '#', icon: Github, external: true },
-        { name: 'Facebook', path: '#', icon: Facebook, external: true },
-        { name: 'Instagram', path: '#', icon: Instagram, external: true },
+        { name: 'LinkedIn', path: 'https://linkedin.com/in/alrifatsabbir', icon: Linkedin, external: true },
+        { name: 'GitHub', path: 'https://github.com/alrifatsabbir', icon: Github, external: true },
+        { name: 'Facebook', path: 'https://facebook.com/alrifatsabbir1', icon: Facebook, external: true},
+        { name: 'Email', path: "mailto:alrifatsabbir@gmail.com", icon: Mails , external: true },
       ]
     },
     {
       title: isBengali ? 'আইনি তথ্য' : 'Legal',
       links: [
-        { name: isBengali ? 'প্রাইভেসি পলিসি' : 'Privacy Policy', path: '#' },
-        { name: isBengali ? 'শর্তাবলী' : 'Terms of Service', path: '#' },
-        { name: isBengali ? 'লাইসেন্স' : 'Licenses', path: '#' },
+        { name: isBengali ? 'প্রাইভেসি পলিসি' : 'Privacy Policy', path: '/privacy-policy' },
+        { name: isBengali ? 'শর্তাবলী' : 'Terms of Service', path: '/terms-and-conditions' },
+        { name: isBengali ? 'লাইসেন্স' : 'Licenses', path: '/licenses' },
       ]
     }
   ];
@@ -42,9 +42,9 @@ const Footer = () => {
           <div className="space-y-6 text-center md:text-left">
             <Link to="/" className="inline-block transition-transform hover:scale-105 duration-300">
               <img 
-                src="/wub-dox.svg" 
+                src="/wub-dow2.png" 
                 alt="Logo" 
-                className="h-24 w-auto object-contain"
+                className="h-32 w-auto object-contain"
               />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0 font-medium">
@@ -56,9 +56,9 @@ const Footer = () => {
             </p>
             <div className="flex justify-center md:justify-start gap-5">
               {[
-                { Icon: Github, href: "#" },
-                { Icon: Linkedin, href: "#" },
-                { Icon: Mail, href: "mailto:support@wubcover.com" }
+                { Icon: Github, href: "https://github.com/alrifatsabbir" },
+                { Icon: Linkedin, href: "https://linkedin.com/in/alrifatsabbir" },
+                { Icon: Mail, href: "mailto:alrifatsabbir@gmail.com" }
               ].map((social, idx) => (
                 <a 
                   key={idx}

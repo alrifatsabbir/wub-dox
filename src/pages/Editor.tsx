@@ -3,16 +3,25 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { useReactToPrint } from 'react-to-print';
-import { ArrowLeft, Printer, RotateCcw, Save, Eye, EyeOff, ZoomIn, ZoomOut } from 'lucide-react';
+import {
+  ArrowLeft,
+  Printer,
+  RotateCcw,
+  Save,
+  ZoomIn,
+  ZoomOut,
+} from 'lucide-react';
+
 import Header from '@/components/Header';
 import CoverPageEditor from '@/components/CoverPageEditor';
 import AssignmentTemplate from '@/components/templates/AssignmentTemplate';
 import LabReportTemplate from '@/components/templates/LabReportTemplate';
 import ForumTemplate from '@/components/templates/ForumTemplate';
 import HomeworkTemplate from '@/components/templates/HomeworkTemplate';
+
 import { Button } from '@/components/ui/button';
-import { Slider } from '@/components/ui/slider';
 import { useToast } from '@/hooks/use-toast';
+
 import {
   CoverPageData,
   defaultCoverPageData,
@@ -25,56 +34,111 @@ const Editor = () => {
   const { type } = useParams<{ type: string }>();
   const [searchParams] = useSearchParams();
   const styleParam = parseInt(searchParams.get('style') || '1');
+
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const isBengali = i18n.language === 'bn';
-  const printRef = useRef<HTMLDivElement>(null);
 
+  const printRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  /* ---------------- DATA ---------------- */
   const [data, setData] = useState<CoverPageData>(loadFromLocalStorage);
-  const [showPreview, setShowPreview] = useState(true);
   const [style, setStyle] = useState(styleParam);
-  const [zoom, setZoom] = useState(50);
+
+  /* ---------------- PREVIEW TRANSFORM ---------------- */
+  const [scale, setScale] = useState(0.6);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStart = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const saved = loadFromLocalStorage();
-    setData(saved);
+    setData(loadFromLocalStorage());
   }, []);
 
+  /* ---------------- PREVENT BROWSER ZOOM (CRITICAL) ---------------- */
+  useEffect(() => {
+    const el = previewRef.current;
+    if (!el) return;
+
+    const wheelHandler = (e: WheelEvent) => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault(); // 🔥 browser zoom বন্ধ
+        const delta = e.deltaY < 0 ? 0.06 : -0.06;
+        setScale(prev =>
+          Math.min(1.3, Math.max(0.3, prev + delta))
+        );
+      }
+    };
+
+    el.addEventListener('wheel', wheelHandler, { passive: false });
+    return () => el.removeEventListener('wheel', wheelHandler);
+  }, []);
+
+  /* ---------------- PRINT ---------------- */
   const handlePrint = useReactToPrint({
     contentRef: printRef,
     documentTitle: `${type}-cover-page`,
   });
 
+  /* ---------------- ACTIONS ---------------- */
   const handleSave = () => {
     saveToLocalStorage(data);
     toast({
       title: isBengali ? 'সংরক্ষিত!' : 'Saved!',
-      description: isBengali ? 'আপনার তথ্য সংরক্ষণ করা হয়েছে' : 'Your data has been saved to local storage',
+      description: isBengali
+        ? 'আপনার তথ্য সংরক্ষণ করা হয়েছে'
+        : 'Your data has been saved',
     });
   };
 
   const handleReset = () => {
     clearLocalStorage();
     setData(defaultCoverPageData);
+    setScale(0.6);
+    setPosition({ x: 0, y: 0 });
     toast({
       title: isBengali ? 'রিসেট!' : 'Reset!',
-      description: isBengali ? 'সব তথ্য মুছে ফেলা হয়েছে' : 'All data has been cleared',
+      description: isBengali
+        ? 'সব তথ্য মুছে ফেলা হয়েছে'
+        : 'All data cleared',
     });
   };
 
+  /* ---------------- DRAG ---------------- */
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    dragStart.current = {
+      x: e.clientX - position.x,
+      y: e.clientY - position.y,
+    };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    setPosition({
+      x: e.clientX - dragStart.current.x,
+      y: e.clientY - dragStart.current.y,
+    });
+  };
+
+  const stopDragging = () => setIsDragging(false);
+
+  /* ---------------- TEMPLATE ---------------- */
   const renderTemplate = () => {
+    const props = { ref: printRef, data, style };
     switch (type) {
       case 'assignment':
-        return <AssignmentTemplate ref={printRef} data={data} style={style} />;
+        return <AssignmentTemplate {...props} />;
       case 'labReport':
-        return <LabReportTemplate ref={printRef} data={data} style={style} />;
+        return <LabReportTemplate {...props} />;
       case 'forum':
-        return <ForumTemplate ref={printRef} data={data} style={style} />;
+        return <ForumTemplate {...props} />;
       case 'homework':
-        return <HomeworkTemplate ref={printRef} data={data} style={style} />;
+        return <HomeworkTemplate {...props} />;
       default:
-        return <AssignmentTemplate ref={printRef} data={data} style={style} />;
+        return <AssignmentTemplate {...props} />;
     }
   };
 
@@ -87,148 +151,114 @@ const Editor = () => {
 
   const styleNames = [t('style1'), t('style2'), t('style3'), t('style4')];
 
-  // Calculate scale based on zoom (30-100 maps to 0.3-1.0)
-  const scale = zoom / 100;
-
-  // Handle mouse wheel zoom
-  const handleWheel = (e: React.WheelEvent) => {
-    if (e.ctrlKey || e.metaKey) {
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? -5 : 5;
-      setZoom(prev => Math.min(100, Math.max(30, prev + delta)));
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
       <main className="pt-20 pb-8 px-4">
         <div className="container mx-auto max-w-7xl">
-          {/* Top Actions */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex flex-wrap items-center justify-between gap-4 mb-6"
-          >
-            <Button
-              variant="ghost"
-              onClick={() => navigate('/templates')}
-              className={`gap-2 ${isBengali ? 'font-bengali' : ''}`}
-            >
-              <ArrowLeft className="w-4 h-4" />
+
+          {/* TOP BAR */}
+          <div className="flex items-center justify-between mb-6 gap-4">
+            <Button variant="ghost" onClick={() => navigate('/templates')}>
+              <ArrowLeft className="w-4 h-4 mr-2" />
               {t('back')}
             </Button>
 
-            <h1 className={`text-2xl font-display font-bold text-foreground ${isBengali ? 'font-bengali' : ''}`}>
+            <h1 className="text-2xl font-bold">
               {templateTitle} {isBengali ? 'এডিটর' : 'Editor'}
             </h1>
 
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setShowPreview(!showPreview)}
-                className="md:hidden"
-                title={showPreview ? 'Hide Preview' : 'Show Preview'}
-              >
-                {showPreview ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              </Button>
-              <Button
-                variant="outline"
-                onClick={handleReset}
-                className={`gap-2 ${isBengali ? 'font-bengali' : ''}`}
-              >
-                <RotateCcw className="w-4 h-4" />
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={handleReset}>
+                <RotateCcw className="w-4 h-4 mr-1" />
                 {t('reset')}
               </Button>
-              <Button
-                variant="outline"
-                onClick={handleSave}
-                className={`gap-2 ${isBengali ? 'font-bengali' : ''}`}
-              >
-                <Save className="w-4 h-4" />
+              <Button variant="outline" onClick={handleSave}>
+                <Save className="w-4 h-4 mr-1" />
                 {t('save')}
               </Button>
-              <Button
-                id="print-btn"
-                onClick={() => handlePrint()}
-                className={`gap-2 ${isBengali ? 'font-bengali' : ''}`}
-              >
-                <Printer className="w-4 h-4" />
+              <Button onClick={handlePrint}>
+                <Printer className="w-4 h-4 mr-1" />
                 {t('print')}
               </Button>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Style Selector */}
-          <div id="style-selector" className="flex gap-2 mb-6 overflow-x-auto pb-2 hide-scrollbar">
-            {[1, 2, 3, 4].map((s) => (
+          {/* STYLE + ZOOM */}
+          <div className="flex items-center justify-between mb-6 gap-4">
+            <div className="flex gap-2">
+              {[1, 2, 3, 4].map(s => (
+                <Button
+                  key={s}
+                  size="sm"
+                  variant={style === s ? 'default' : 'outline'}
+                  onClick={() => setStyle(s)}
+                >
+                  {styleNames[s - 1]}
+                </Button>
+              ))}
+            </div>
+
+            {/* ZOOM BUTTONS */}
+            <div className="flex items-center gap-2">
               <Button
-                key={s}
-                variant={style === s ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setStyle(s)}
-                className={isBengali ? 'font-bengali' : ''}
+                size="icon"
+                variant="outline"
+                onClick={() => setScale(s => Math.max(0.3, s - 0.1))}
               >
-                {styleNames[s - 1]}
+                <ZoomOut className="w-4 h-4" />
               </Button>
-            ))}
+              <span className="text-sm w-12 text-center">
+                {Math.round(scale * 100)}%
+              </span>
+              <Button
+                size="icon"
+                variant="outline"
+                onClick={() => setScale(s => Math.min(1.3, s + 0.1))}
+              >
+                <ZoomIn className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
 
-          {/* Zoom Controls */}
-          <div id="zoom-controls" className="flex items-center gap-4 mb-6 p-3 rounded-xl bg-muted/30 border border-border">
-            <ZoomOut className="w-4 h-4 text-muted-foreground" />
-            <Slider
-              value={[zoom]}
-              onValueChange={(value) => setZoom(value[0])}
-              min={30}
-              max={100}
-              step={5}
-              className="w-40"
-            />
-            <ZoomIn className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground min-w-[3rem]">{zoom}%</span>
-          </div>
+          {/* MAIN LAYOUT */}
+          <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
 
-          {/* Editor Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Form */}
-            <motion.div
-              id="editor-form"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
-              className="bg-card rounded-2xl border border-border p-6 shadow-card overflow-y-auto max-h-[calc(100vh-280px)] hide-scrollbar"
-            >
+            {/* LEFT */}
+            <div className="lg:col-span-3 bg-card border rounded-2xl p-6 h-[calc(100vh-250px)] overflow-y-auto hide-scrollbar">
               <CoverPageEditor
                 data={data}
                 onChange={setData}
                 templateType={type || 'assignment'}
               />
-            </motion.div>
+            </div>
 
-            {/* Preview */}
-            <motion.div
-              id="preview-area"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className={`bg-muted/30 rounded-2xl border border-border p-6 overflow-auto max-h-[calc(100vh-280px)] hide-scrollbar ${
-                showPreview ? 'block' : 'hidden lg:block'
-              }`}
-              onWheel={handleWheel}
+            {/* RIGHT PREVIEW */}
+            <div
+              ref={previewRef}
+              className="lg:col-span-7 bg-muted/20 border rounded-2xl relative overflow-hidden h-[calc(100vh-250px)]"
             >
-              <div 
-                className="origin-top-left transition-transform duration-200"
-                style={{ 
-                  transform: `scale(${scale})`,
-                  width: `${100 / scale}%`
-                }}
+              <div
+                className="absolute inset-0 cursor-grab active:cursor-grabbing"
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={stopDragging}
+                onMouseLeave={stopDragging}
               >
-                {renderTemplate()}
+                <div
+                  style={{
+                    transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+                    transformOrigin: '0 0',
+                    width: 'fit-content',
+                    transition: isDragging ? 'none' : 'transform 0.15s ease-out',
+                  }}
+                >
+                  {renderTemplate()}
+                </div>
               </div>
-            </motion.div>
+            </div>
+
           </div>
         </div>
       </main>

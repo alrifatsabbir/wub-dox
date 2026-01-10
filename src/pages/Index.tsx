@@ -50,7 +50,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden">
+    <div className="min-h-screen w-full relative overflow-hidden hide-scrollbar">
       {/* Dynamic Background Layer (Navy/Gold Void) */}
       <div
         className="absolute inset-0 z-0"
