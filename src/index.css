@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 224 71% 25%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 45 93% 47%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 14% 90%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 224 71% 35%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 13% 85%;
+    --input: 220 13% 85%;
+    --ring: 224 71% 25%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gold: 45 93% 47%;
+    --gold-light: 45 93% 60%;
+    --navy: 224 71% 25%;
+    --navy-light: 224 60% 40%;
+    --cream: 40 33% 96%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(224 71% 25%), hsl(224 60% 35%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 93% 47%), hsl(40 90% 55%));
+    --gradient-hero: linear-gradient(180deg, hsl(220 20% 97%) 0%, hsl(224 30% 95%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(224 71% 25% / 0.15);
+    --shadow-elevated: 0 10px 40px -10px hsl(224 71% 25% / 0.25);
+    --shadow-card: 0 2px 12px -2px hsl(224 71% 25% / 0.1);
+    
+    /* Typography */
+    --font-display: "Genos", system-ui;
+    --font-body: "Genos", sans-serif;
+    --font-bengali: 'Noto Sans Bengali', sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 45 93% 55%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 224 60% 40%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 222 30% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 45 80% 50%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 30% 20%;
+    --input: 222 30% 20%;
+    --ring: 45 93% 55%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-size: 17px; /* ফন্ট বড় করার জন্য এখানে ১৭ পিক্সেল করা হয়েছে */
+  }
+
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-semibold tracking-tight;
+  }
+  
+  .font-bengali {
+    font-family: var(--font-bengali);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
+  }
+  
+  .gradient-text {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .cover-page-border {
+    border: 3px double hsl(var(--primary));
+    position: relative;
+  }
+  
+  .cover-page-border::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid hsl(var(--primary) / 0.5);
+    pointer-events: none;
+  }
+
+  /* Hide scrollbar utility */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Driver.js custom dark theme */
+.driver-popover-dark {
+  background: hsl(222, 47%, 11%) !important;
+  color: hsl(210, 40%, 98%) !important;
+  border: 1px solid hsl(222, 30%, 20%) !important;
+  font-family: var(--font-body) !important;
+}
+
+.driver-popover-dark .driver-popover-title {
+  color: hsl(45, 93%, 55%) !important;
+  font-family: var(--font-display) !important;
+  font-size: 1.25rem !important;
+}
+
+.driver-popover-dark .driver-popover-description {
+  color: hsl(215, 20%, 75%) !important;
+}
+
+.driver-popover-dark .driver-popover-progress-text {
+  color: hsl(215, 20%, 65%) !important;
+}
+
+.driver-popover-dark .driver-popover-prev-btn,
+.driver-popover-dark .driver-popover-next-btn {
+  background: hsl(45, 93%, 55%) !important;
+  color: hsl(222, 47%, 11%) !important;
+  border: none !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.5rem !important;
+  font-weight: 500 !important;
+}
+
+.driver-popover-dark .driver-popover-prev-btn:hover,
+.driver-popover-dark .driver-popover-next-btn:hover {
+  background: hsl(45, 93%, 60%) !important;
+}
+
+.driver-popover-dark .driver-popover-close-btn {
+  color: hsl(215, 20%, 65%) !important;
+}
+
+.driver-popover-dark .driver-popover-arrow-side-left::before,
+.driver-popover-dark .driver-popover-arrow-side-right::before,
+.driver-popover-dark .driver-popover-arrow-side-top::before,
+.driver-popover-dark .driver-popover-arrow-side-bottom::before {
+  border-color: hsl(222, 47%, 11%) !important;
+}
+
+@media print {
+  body {
+    background: white !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+}
