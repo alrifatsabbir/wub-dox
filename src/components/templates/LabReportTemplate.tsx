@@ -50,7 +50,6 @@ const LabReportTemplate = forwardRef<HTMLDivElement, TemplateProps>(({ data, sty
             <h1 className="text-2xl font-display font-bold text-[#1a365d] uppercase tracking-wide">
               {data.universityName}
             </h1>
-            <p className="text-base text-[#4a5568]">{facultyName}</p>
             <p className="text-sm text-[#718096]">{departmentName}</p>
           </div>
 
@@ -296,7 +295,7 @@ const LabReportTemplate = forwardRef<HTMLDivElement, TemplateProps>(({ data, sty
           <h1 className="text-2xl font-display font-bold text-[#1a365d] uppercase tracking-wide">
             {data.universityName}
           </h1>
-          <p className="text-lg text-[#4a5568] font-medium">{facultyName}</p>
+          {/* <p className="text-lg text-[#4a5568] font-medium">{facultyName}</p> */}
           <p className="text-base text-[#718096]">{departmentName}</p>
         </div>
 

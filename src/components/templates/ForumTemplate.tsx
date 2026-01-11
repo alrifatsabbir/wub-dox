@@ -36,7 +36,7 @@ const ForumTemplate = forwardRef<HTMLDivElement, TemplateProps>(({ data, style =
             <h1 className="text-2xl font-display font-bold text-[#2d3748] uppercase tracking-wider">
               {data.universityName}
             </h1>
-            <p className="text-base text-[#4a5568]">{facultyName}</p>
+            {/* <p className="text-base text-[#4a5568]">{facultyName}</p> */}
             <p className="text-sm text-[#718096]">{departmentName}</p>
           </div>
 
@@ -127,7 +127,7 @@ const ForumTemplate = forwardRef<HTMLDivElement, TemplateProps>(({ data, style =
                 {data.universityName}
               </h1>
               <div className="w-20 h-1 bg-[#d69e2e] mx-auto" />
-              <p className="text-sm text-[#4a5568]">{facultyName}</p>
+              {/* <p className="text-sm text-[#4a5568]">{facultyName}</p> */}
               <p className="text-xs text-[#718096]">{departmentName}</p>
             </div>
 
@@ -264,7 +264,7 @@ const ForumTemplate = forwardRef<HTMLDivElement, TemplateProps>(({ data, style =
             <div className="w-2 h-2 bg-[#d69e2e] rounded-full" />
             <div className="h-px w-16 bg-[#d69e2e]" />
           </div>
-          <p className="text-lg text-[#4a5568]">{facultyName}</p>
+          {/* <p className="text-lg text-[#4a5568]">{facultyName}</p> */}
           <p className="text-base text-[#718096]">{departmentName}</p>
         </div>
 

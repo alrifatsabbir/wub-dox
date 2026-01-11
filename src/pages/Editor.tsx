@@ -226,7 +226,7 @@ const Editor = () => {
           <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
 
             {/* LEFT */}
-            <div className="lg:col-span-3 bg-card border rounded-2xl p-6 h-[calc(100vh-250px)] overflow-y-auto hide-scrollbar">
+            <div className="lg:col-span-3 bg-card border rounded-2xl p-6 h-[calc(100vh-50px)] overflow-y-auto hide-scrollbar">
               <CoverPageEditor
                 data={data}
                 onChange={setData}
