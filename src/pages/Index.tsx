@@ -100,7 +100,7 @@ const Index = () => {
               <h1 className={`text-4xl sm:text-5xl md:text-7xl font-display font-bold text-white leading-tight ${isBengali ? 'font-bengali' : ''}`}>
                 <span className="block">
                   <GradientText colors={["#fbbf24", "#f59e0b", "#d97706", "#fbbf24"]}>
-                    WUB
+                    WUB DOX
                   </GradientText>
                   <span className="sm:ml-4">
                     <BlurText text={isBengali ? "কভার পেজ জেনারেটর" : "Cover Page Generator"} delay={150} />

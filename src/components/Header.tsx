@@ -66,7 +66,7 @@ const Header = () => {
           {/* Social Links */}
           <div id="social-links" className="hidden sm:flex items-center gap-0.5">
             <a
-              href="https://github.com"
+              href="https://github.com/alrifatsabbir"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
@@ -75,7 +75,7 @@ const Header = () => {
               <Github className="w-4 h-4" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/alrifatsabbir"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
