@@ -194,6 +194,12 @@ const CoverPageEditor = ({ data, onChange, templateType }: CoverPageEditorProps)
 
         {(templateType === 'forum' || templateType === 'homework') &&
           renderField(t('topicName'), 'topicName')}
+
+        {templateType === 'forum' && (
+          <>
+            {renderField(t('forumNo'),'forumNo')}
+          </>
+        )}
       </div>
 
       {/* Student Info */}

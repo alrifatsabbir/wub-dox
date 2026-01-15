@@ -47,6 +47,7 @@ const resources = {
       batch: "Batch",
       group: "Group",
       roll: "Roll",
+      forumNo: "Forum No",
       
       // Teacher Info
       teacherName: "Teacher Name",
@@ -157,6 +158,7 @@ const resources = {
       batch: "ব্যাচ",
       group: "গ্রুপ",
       roll:"রোল",
+      forumNo: "ফোরাম নং",
       
       // Teacher Info
       teacherName: "শিক্ষকের নাম",

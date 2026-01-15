@@ -17,6 +17,7 @@ export interface CoverPageData {
   batch: string;
   group: string;
   roll: string;
+  forumNo: string;
   teacherName: string;
   teacherDesignation: string;
   teacherSub: string;
@@ -43,6 +44,7 @@ export const defaultCoverPageData: CoverPageData = {
   batch: "69",
   group: "",
   roll:"",
+  forumNo:"",
   teacherName: "",
   teacherDesignation: "professor",
   teacherSub:"",
