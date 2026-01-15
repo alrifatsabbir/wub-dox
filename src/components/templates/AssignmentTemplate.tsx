@@ -204,52 +204,58 @@ const AssignmentTemplate = forwardRef<HTMLDivElement, TemplateProps>(({ data, st
       >
         <div className="h-full flex flex-col">
           {/* Minimal header */}
-          <div className="text-center mb-12">
-            <h1 className="text-lg font-medium text-[#2d3748] tracking-wide">
-              {data.universityName}
-            </h1>
-            <p className="text-sm text-[#718096] mt-1">{departmentName}</p>
+          <div className="inline-flex flex-col items-center gap-2 mb-12">
+            <img src="/wub_logo_j.png" alt="wub-logo" className="w-40"/>
+            <img src="/wub-name.png" alt="logo-name" className="h-20" />
+            <p className="text-xl text-[#2d3748]">{departmentName}</p>
           </div>
 
           {/* Large assignment number */}
-          <div className="flex-1 flex flex-col items-center justify-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#a0aec0] mb-4">
-              {isBengali ? 'অ্যাসাইনমেন্ট' : 'Assignment'}
+          <div className="flex-1 flex flex-col items-start mx-12 justify-start">
+            <p className="text-base uppercase font-semibold text-[#2d3748] mb-2">
+              {isBengali ? 'অ্যাসাইনমেন্ট নং' : 'Assignment No'}: <span className='text-[#718096]'>{data.assignmentNo}</span>
             </p>
-            <span className="text-8xl font-display font-light text-[#1a365d]">{data.assignmentNo}</span>
+            <p className="text-base uppercase font-semibold text-[#2d3748] mb-2">
+              {isBengali ? 'অ্যাসাইনমেন্ট নং' : 'Assignment Name'}: <span className='text-[#718096]'>{data.assignmentTitle}</span>
+            </p>
             
-            <div className="mt-8 text-center">
-              <p className="text-sm text-[#a0aec0]">{data.courseCode}</p>
-              <p className="text-lg text-[#2d3748] mt-1">{data.courseTitle}</p>
-              {data.assignmentTitle && (
-                <p className="text-sm text-[#718096] mt-2 italic">{data.assignmentTitle}</p>
-              )}
+            <div className="mt-1 text-start">
+            <p className="text-base uppercase font-semibold text-[#2d3748] mb-2">
+             {isBengali ? 'কোর্স কোড' : 'Course Code'}: <span className='text-[#718096]'>{data.courseCode}</span>
+            </p>
+            <p className="text-base uppercase font-semibold text-[#2d3748] mb-2">
+             {isBengali ? 'কোর্স নাম' : 'Course Name'}: <span className='text-[#718096]'>{data.courseTitle}</span>
+            </p>
+            <p className="text-base uppercase font-semibold text-[#2d3748]">            
+              {isBengali ? 'জমা দেওয়ার তারিখ' : 'Date of Submission'}: <span className="font-semibold text-[#718096]">{data.submissionDate}</span>
+            </p>
             </div>
           </div>
 
-          {/* Minimal info grid */}
-          <div className="grid grid-cols-2 gap-8 text-sm border-t border-[#e2e8f0] pt-8">
-            <div>
-              <p className="text-xs uppercase tracking-wider text-[#a0aec0] mb-2">
-                {isBengali ? 'জমা দিয়েছেন' : 'Submitted By'}
-              </p>
-              <p className="font-medium text-[#2d3748]">{data.studentName}</p>
-              <p className="text-[#718096]">{data.studentId}</p>
-              <p className="text-[#718096]">{data.semester} | {data.section}</p>
+            {/* Submitted sections */}
+            <div className="flex-1 flex items-center mb-20">
+              <div className="w-full space-y-8">
+                <div className="text-center">
+                  <p className="text-xl font-semibold uppercase text-[#d69e2e] mb-3">
+                    {isBengali ? 'জমা দিয়েছেন' : 'Submitted By'}
+                  </p>
+                  <p className="text-xl font-display font-semibold text-[#1a365d]">{isBengali ? 'নাম' : 'Name'}: {data.studentName}</p>
+                  <div className="text-center">
+                    <p><span className="text-lg text-[#718096]">{isBengali ? 'রোল' : 'Roll'}:</span> <span className="font-medium text-[#2d3748]">{data.roll}</span></p>
+                    <p><span className="text-lg text-[#718096]">{isBengali ? 'আইডি' : 'ID'}:</span> <span className="font-medium text-[#2d3748]">{data.studentId}</span></p>
+                    <p><span className="text-lg text-[#718096]">{isBengali ? 'ব্যাচ' : 'Batch'}:</span> <span className="font-medium text-[#2d3748]">{data.batch}{data.section}</span></p>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <p className="text-xl font-semibold uppercase text-[#d69e2e] mb-3">
+                    {isBengali ? 'জমা দেওয়া হয়েছে' : 'Submitted To'}
+                  </p>
+                  <p className="text-xl font-display font-semibold text-[#1a365d]">{data.teacherName}</p>
+                  <p className="text-base font-semibold text-[#2d3748]">{designationName}</p>
+                  <p className="text-sm text-[#2d3748]">{departmentName}</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-wider text-[#a0aec0] mb-2">
-                {isBengali ? 'জমা দেওয়া হয়েছে' : 'Submitted To'}
-              </p>
-              <p className="font-medium text-[#2d3748]">{data.teacherName}</p>
-              <p className="text-[#718096]">{designationName}</p>
-            </div>
-          </div>
-
-          {/* Minimal footer */}
-          <div className="text-center mt-8 pt-4">
-            <p className="text-xs text-[#a0aec0]">{data.submissionDate}</p>
-          </div>
         </div>
       </div>
     );
