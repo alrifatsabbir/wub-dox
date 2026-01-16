@@ -26,9 +26,9 @@ const Footer = () => {
     {
       title: isBengali ? 'আইনি তথ্য' : 'Legal',
       links: [
-        { name: isBengali ? 'প্রাইভেসি পলিসি' : 'Privacy Policy', path: '/privacy-policy' },
-        { name: isBengali ? 'শর্তাবলী' : 'Terms of Service', path: '/terms-and-conditions' },
-        { name: isBengali ? 'লাইসেন্স' : 'Licenses', path: '/licenses' },
+        { name: isBengali ? 'প্রাইভেসি পলিসি' : 'Privacy Policy', path: '/privacy' },
+        { name: isBengali ? 'শর্তাবলী' : 'Terms of Service', path: '/terms' },
+        { name: isBengali ? 'লাইসেন্স' : 'License', path: '/license' },
       ]
     }
   ];

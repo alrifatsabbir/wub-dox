@@ -29,9 +29,9 @@ const App = () => (
           <Route path="/templates" element={<Templates />} />
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/editor/:type" element={<Editor />} />
-          <Route path="/privacy-policy" element={<Privacy/>} />
-          <Route path="/terms-and-conditions" element={<Terms/>} />
-          <Route path="/licenses" element={<License/>} />
+          <Route path="/privacy" element={<Privacy/>} />
+          <Route path="/terms" element={<Terms/>} />
+          <Route path="/license" element={<License/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer/>
