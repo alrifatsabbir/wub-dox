@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin, MessageSquare, MapPin } from 'lucide-react';
-import Header from '@/components/Header';
+
 
 const Contact = () => {
   const { t, i18n } = useTranslation();
@@ -40,8 +40,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      
       <main className="pt-32 pb-12 px-4">
         <div className="container mx-auto max-w-3xl">
           <motion.div 

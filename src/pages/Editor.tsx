@@ -10,8 +10,6 @@ import {
   ZoomIn,
   ZoomOut,
 } from 'lucide-react';
-
-import Header from '@/components/Header';
 import CoverPageEditor from '@/components/CoverPageEditor';
 import AssignmentTemplate from '@/components/templates/AssignmentTemplate';
 import LabReportTemplate from '@/components/templates/LabReportTemplate';
@@ -141,8 +139,6 @@ const Editor = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-
       <main className="pt-20 pb-8 px-4">
         <div className="container mx-auto max-w-7xl">
 

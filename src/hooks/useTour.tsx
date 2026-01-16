@@ -2,7 +2,7 @@ import { useEffect, useCallback } from 'react';
 import { driver, DriveStep } from 'driver.js';
 import 'driver.js/dist/driver.css';
 
-const TOUR_SEEN_KEY = 'covergen_tour_seen';
+const TOUR_SEEN_KEY = 'wub-dox-tour-seen';
 
 interface TourConfig {
   steps: DriveStep[];

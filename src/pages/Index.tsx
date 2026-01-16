@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { FileText, BookOpen, FlaskConical, PenTool, ArrowRight, Sparkles } from 'lucide-react';
-import Header from '@/components/Header';
 import TemplateCard from '@/components/TemplateCard';
 import BlurText from '@/components/animations/BlurText';
 import GradientText from '@/components/animations/GradientText';
@@ -72,9 +71,6 @@ const Index = () => {
           className="w-full h-full"
         />
       </div>
-      
-      <Header />
-
       {/* Content Section */}
       <div className="relative z-10">
         <section className="pt-32 pb-20 px-4 min-h-screen">
