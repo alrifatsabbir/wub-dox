@@ -12,6 +12,7 @@ const Footer = () => {
       links: [
         { name: isBengali ? 'টেমপ্লেটস' : 'Templates', path: '/templates' },
         { name: isBengali ? 'যোগাযোগ' : 'Contact', path: '/contact' },
+        { name: isBengali ? '' : 'Blogs', path: '/blogs'},
       ]
     },
     {

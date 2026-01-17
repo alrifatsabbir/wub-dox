@@ -8,6 +8,7 @@ const resources = {
       home: "Home",
       templates: "Templates",
       editor: "Editor",
+      blogs: "Blogs",
       
       // Hero
       heroTitle: "WUB Cover Page Generator",
@@ -119,6 +120,7 @@ const resources = {
       home: "হোম",
       templates: "টেমপ্লেট",
       editor: "এডিটর",
+      blogs: "ব্লগ",
       
       // Hero
       heroTitle: "WUB কভার পেজ জেনারেটর",
