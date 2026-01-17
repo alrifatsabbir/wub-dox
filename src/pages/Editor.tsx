@@ -72,32 +72,18 @@ const Editor = () => {
     return () => el.removeEventListener('wheel', wheelHandler);
   }, []);
 
-/* ---------------- PRINT ---------------- */
-const handlePrint = useReactToPrint({
-  contentRef: printRef,
-  documentTitle: `${type}-cover-page`,
-  print: async (target) => {
-    // Ensure the print window has proper styling
-    const printWindow = target.contentWindow;
-    if (printWindow) {
-      const style = printWindow.document.createElement('style');
-      style.textContent = `
-        @page { size: A4; margin: 0; }
-        body { background: white; margin: 0; }
-        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      `;
-      printWindow.document.head.appendChild(style);
-      printWindow.print();
-    }
-  },
-});
+  /* ---------------- PRINT ---------------- */
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    documentTitle: `${type}-cover-page`,
+  });
 
   /* ---------------- ACTIONS ---------------- */
   const handleSave = () => {
     saveToLocalStorage(data);
     toast({
       title: isBengali ? 'সংরক্ষিত!' : 'Saved!',
-      description: isBengali ? 'আপনার তথ্য সংরক্ষণ করা হয়েছে' : 'Your data has been saved',
+      description: isBengali ? 'আপনার তথ্য সংরক্ষণ করা হয়েছে' : 'Your data has been saved',
     });
   };
 
@@ -107,7 +93,7 @@ const handlePrint = useReactToPrint({
     setPosition({ x: 20, y: 20 });
     toast({
       title: isBengali ? 'রিসেট!' : 'Reset!',
-      description: isBengali ? 'সব তথ্য মুছে ফেলা হয়েছে' : 'All data cleared',
+      description: isBengali ? 'সব তথ্য মুছে ফেলা হয়েছে' : 'All data cleared',
     });
   };
 
