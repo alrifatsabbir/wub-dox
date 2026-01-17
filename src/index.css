@@ -236,15 +236,8 @@
 }
 
 @media print {
-  body {
-    background: white !important;
-  }
-  
-  .no-print {
+  header, nav, footer, button,
+  #editor-form, #style-selector, #zoom-controls {
     display: none !important;
-  }
-  
-  .print-only {
-    display: block !important;
   }
 }
