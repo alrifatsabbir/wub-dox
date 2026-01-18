@@ -162,6 +162,8 @@ export const teachersByDepartment: Record<string, { name: string; designation: s
     { name: 'Tanzin Ahammad', designation: 'lecturer'},
     { name: 'Sumaiya Rahman', designation: 'lecturer'},
     { name: 'Syeda Jannatul Naim', designation: 'lecturer'},
+    { name: 'Sifat Moonjerin', designation: 'lecturer'},
+    { name: 'Md. Raihanul Haque', designation: 'lecturer'},
     { name: 'Musfique-us-Salehin Arnob', designation: 'graduateAssistant'},
   ],
   eee: [
