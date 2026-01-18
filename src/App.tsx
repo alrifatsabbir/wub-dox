@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster as Sonner, toast } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -10,7 +10,7 @@ import Templates from "./pages/Templates";
 import Editor from "./pages/Editor";
 import NotFound from "./pages/NotFound";
 import Blogs from "./pages/Blogs";
-import BlogsDetails from "./pages/BlogsDetails"
+import BlogsDetails from "./pages/BlogsDetails";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
@@ -39,14 +39,39 @@ const App = () => {
       setLoading(false);
     }, 1500);
 
-    return () => clearTimeout(timer);
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+      toast.error("Right-click is disabled for security reasons!", {
+        position: "bottom-right",
+      });
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
+        (e.ctrlKey && e.key === "u")
+      ) {
+        e.preventDefault();
+        toast.error("DevTools access is restricted!");
+      }
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Sonner />
+        <Sonner closeButton richColors />
         {loading && <Loader />}
         <BrowserRouter>
           <ScrollToTop /> 

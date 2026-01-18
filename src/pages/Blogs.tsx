@@ -15,7 +15,7 @@ export default function Blogs() {
         ? "অ্যাসাইনমেন্টের প্রথম ইম্প্রেশন তৈরি হয় কভার পেজ দিয়ে। জানুন সঠিক নিয়মগুলো।" 
         : "The first impression of an assignment starts with the cover page. Learn the right rules.",
       author: "Admin",
-      date: "Jan 17, 2026",
+      date: "Jan 18, 2026",
       category: isBengali ? "টিপস" : "Tips",
       image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800"
     },
@@ -37,10 +37,21 @@ export default function Blogs() {
         ? "ম্যানুয়ালি কভার পেজ বানানোর চেয়ে অনলাইন টুল কেন বেশি কার্যকর তা জানুন।" 
         : "Learn why online tools are more effective than manual cover page creation.",
       author: "Admin",
-      date: "Jan 17, 2026",
+      date: "Jan 16, 2026",
       category: isBengali ? "টেক" : "Tech",
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=800"
     },
+    {
+      id: 4,
+      title: isBengali ? "WUB DOX-এর পেছনের গল্প" : "The Beginning of WUB DOX",
+      excerpt: isBengali 
+        ? "একটি ল্যাব এক্সাম, এক কাপ চা আর একটি আইডিয়া—কিভাবে শুরু হলো WUB DOX?" 
+        : "One lab exam, a cup of tea, and a vision—how WUB DOX came to life.",
+      author: "Admin",
+      date: "Jan 01, 2026",
+      category: isBengali ? "গল্প" : "Story",
+      image: "https://images.unsplash.com/photo-1632594737623-bea601083890?q=80&w=870&auto=format&fit=crop"
+}
   ];
 
   return (
