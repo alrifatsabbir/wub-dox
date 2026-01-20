@@ -24,7 +24,13 @@ export interface CoverPageData {
   submissionDate: string;
   experimentDate: string;
 }
-
+const getTodayFormatted = () => {
+  const date = new Date();
+  const d = String(date.getDate()).padStart(2, '0');
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const y = date.getFullYear();
+  return `${d}/${m}/${y}`;
+};
 export const defaultCoverPageData: CoverPageData = {
   universityName: "World University of Bangladesh",
   facultyName: "facultyOfEngineering",
@@ -48,8 +54,8 @@ export const defaultCoverPageData: CoverPageData = {
   teacherName: "",
   teacherDesignation: "professor",
   teacherSub:"",
-  submissionDate: new Date().toISOString().split('T')[0],
-  experimentDate: new Date().toISOString().split('T')[0],
+  submissionDate: getTodayFormatted(),
+  experimentDate: getTodayFormatted(),
 };
 
 const STORAGE_KEY = 'coverPageData';
