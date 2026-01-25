@@ -126,6 +126,19 @@ export default function BlogDetails() {
               ))}
             </ul>
           );
+          if (item.type === 'a') {
+            return (
+              <div key={idx} className="mt-12 text-center">
+                <button
+                  onClick={() => navigate(item.href!)}
+                  className="inline-block bg-[#d69e2e] text-white px-10 py-4 rounded-full font-bold text-lg
+                             hover:scale-105 transition-transform shadow-lg shadow-[#d69e2e]/30"
+                >
+                  {item.text}
+                </button>
+              </div>
+            );
+          }
           return null;
         })}
       </motion.div>

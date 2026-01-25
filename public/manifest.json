@@ -3,8 +3,8 @@
   "name": "WUB DOX - Cover Page Generator",
   "icons": [
     {
-      "src": "/wub-dox1.png",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "/wub-dox-fav.png",
+      "sizes": "32x32 24x24 16x16",
       "type": "image/png"
     },
     {
@@ -19,8 +19,10 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#030816",
-  "background_color": "#030816"
+  "background_color": "#030816",
+  "orientation": "portrait",
+  "scope": "/"
 }
