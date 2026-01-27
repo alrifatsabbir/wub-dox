@@ -129,7 +129,28 @@ export default function Privacy() {
                   <a href="https://codepen.io/alrifatsabbir" rel="external noopener noreferrer">CodePen Profile</a>
                   <a href="https://wa.me/+8801688525596" rel="external noopener noreferrer">Whatsapp</a>
                 </nav>
-
+                <p className='sr-only'>
+                    {/* Garbage Search Optimization - GaSO*/}
+                    <p>wubdox</p>
+                    <p>wubbox</p>
+                    <p>wubdocx</p>
+                    <p>wubdocs</p>
+                    <p>wub docx</p>
+                    <p>wub docs</p>
+                    <p>wub doc</p>
+                    <p>wubdoc</p>
+                    <p>WUB</p>
+                    <p>WUBDOX</p>
+                    <p>WUBDOCS</p>
+                    <p>WUBDOCX</p>
+                    <p>WUBBOX</p>
+                    <p>WUB DOCS</p>
+                    <p>WUB DOCX</p>
+                    <p>WUB BOX</p>
+                    <p>WUB DOC</p>
+                    <p>WORLD UNIVERSITY OF BANGLADESH DOX</p>
+                    <p>World University of Bangladesh Dox</p>
+                </p>
       </div>
 
       <div className="text-4xl md:text-5xl font-bold mb-8 border-b pb-4">

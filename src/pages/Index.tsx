@@ -7,11 +7,22 @@ import BlurText from '@/components/animations/BlurText';
 import GradientText from '@/components/animations/GradientText';
 import ShinyButton from '@/components/animations/ShinyButton';
 import LightRays from '@/components/LightRays';
+import { useState, useEffect } from 'react';
 
 const Index = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const isBengali = i18n.language === 'bn';
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth > 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const templates = [
     {
@@ -57,18 +68,20 @@ const Index = () => {
         }}
       />
 
-      <div className="absolute inset-0 z-[1] opacity-90 pointer-events-none">
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#ffd" 
-          raysSpeed={3.2}
-          lightSpread={0.8}
-          rayLength={1.5}
-          followMouse={true}
-          mouseInfluence={0.5}
-          className="w-full h-full"
-        />
-      </div>
+    {isDesktop && (
+        <div className="absolute inset-0 z-[1] opacity-90 pointer-events-none">
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#ffd" 
+            raysSpeed={3.2}
+            lightSpread={0.8}
+            rayLength={1.5}
+            followMouse={true}
+            mouseInfluence={0.5}
+            className="w-full h-full"
+          />
+        </div>
+      )}
 
       <div className="relative z-10">
         <section className="pt-32 pb-20 px-4 min-h-screen">
@@ -114,6 +127,28 @@ const Index = () => {
                   <a href="https://codepen.io/alrifatsabbir" rel="external noopener noreferrer">CodePen Profile</a>
                   <a href="https://wa.me/+8801688525596" rel="external noopener noreferrer">Whatsapp</a>
                 </nav>
+                <p className='sr-only'>
+                    {/* Garbage Search Optimization - GaSO*/}
+                    <p>wubdox</p>
+                    <p>wubbox</p>
+                    <p>wubdocx</p>
+                    <p>wubdocs</p>
+                    <p>wub docx</p>
+                    <p>wub docs</p>
+                    <p>wub doc</p>
+                    <p>wubdoc</p>
+                    <p>WUB</p>
+                    <p>WUBDOX</p>
+                    <p>WUBDOCS</p>
+                    <p>WUBDOCX</p>
+                    <p>WUBBOX</p>
+                    <p>WUB DOCS</p>
+                    <p>WUB DOCX</p>
+                    <p>WUB BOX</p>
+                    <p>WUB DOC</p>
+                    <p>WORLD UNIVERSITY OF BANGLADESH DOX</p>
+                    <p>World University of Bangladesh Dox</p>
+                </p>
               </div>
 
               <motion.div

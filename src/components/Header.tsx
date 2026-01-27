@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, Home, Github, Linkedin, HelpCircle, Phone, Menu, X, FilePen} from 'lucide-react';
 import LanguageToggle from './LanguageToggle';
 import { Button } from './ui/button';
-// এখানে functions গুলো ইমপোর্ট করা হয়েছে
+
 import { useTour, getHomeTourSteps, getEditorTourSteps } from '@/hooks/useTour';
 import logo from '/wub-dox.png';
 
@@ -16,8 +16,6 @@ const Header = () => {
   const isBengali = i18n.language === 'bn';
   
   const isEditorPage = location.pathname.startsWith('/editor');
-
-  // পরিবর্তন: সরাসরি ভ্যারিয়েবলের বদলে ফাংশন কল করা হয়েছে
   const tourSteps = isEditorPage ? getEditorTourSteps() : getHomeTourSteps();
   const { startTour } = useTour({ steps: tourSteps });
 
@@ -80,7 +78,7 @@ const Header = () => {
               <a href="https://linkedin.com/in/alrifatsabbir" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-muted-foreground hover:bg-muted transition-colors"><Linkedin className="w-4 h-4" /></a>
             </div>
 
-            {/* Help Button - ট্যুর স্টার্ট করার বাটন */}
+            {/* Help Button - Tour Start Button */}
             <Button 
               variant="ghost" 
               size="sm" 

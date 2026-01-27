@@ -42,9 +42,11 @@ const Footer = () => {
           <div className="space-y-6 text-center md:text-left">
             <Link to="/" className="inline-block transition-transform hover:scale-105 duration-300">
               <img 
-                src="/wub-dow2.png" 
+                src="/wub-dox.png" 
                 alt="WUB DOX" 
-                className="h-32 w-auto object-contain"
+                width="128" 
+                height="128"
+                className="h-32 w-32 object-contain"
               />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0 font-medium">
@@ -64,7 +66,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-500 hover:text-[#fbbf24] transform hover:-translate-y-1 transition-all duration-300"
+                  className="text-slate-300 hover:text-[#fbbf24] transform hover:-translate-y-1 transition-all duration-300"
                 >
                   <social.Icon size={20} />
                 </a>
